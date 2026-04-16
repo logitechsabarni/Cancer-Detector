@@ -1,20 +1,33 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# OncoAI — Breast Cancer Detection & AI Doctor Assistant
 
-# Run and deploy your AI Studio app
+OncoAI is a production-ready medical dashboard for AI-assisted mammogram screening and clinical guidance.
 
-This contains everything you need to run your app locally.
+## Features
+- 📊 **Intelligent Dashboard**: Patient management and screening overview.
+- 🔬 **AI Screening**: Deep-learning powered mammogram analysis for classification (Benign/Malignant).
+- 🔥 **Explainability**: AI intensity mapping (Grad-CAM) to visualize focus regions.
+- 🧾 **Clinical Reports**: Automated BI-RADS scoring and detailed clinical guidance.
+- 📊 **Visual Analytics**: Interactive data visualization of risk scores and patient distribution.
+- 🧠 **AI Doctor Chat**: Specialized assistant for clinical Q&A and explanation of findings.
 
-View your app in AI Studio: https://ai.studio/apps/ef2642ed-a710-41bf-92bd-2acbf3e1cbca
+## Tech Stack
+- **Frontend**: React, Tailwind CSS, Chart.js, Motion.
+- **Backend**: Express (Node.js), Gemini 1.5 Pro (Vision & Chat).
+- **AI Engine**: Google Gemini Multimodal APIs.
 
-## Run Locally
-
-**Prerequisites:**  Node.js
-
-
+## Setup Instructions
 1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+   ```bash
+   npm install
+   ```
+2. Create a `.env` file and add your Gemini API Key:
+   ```env
+   GEMINI_API_KEY=your_key_here
+   ```
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+## Medical Disclaimer
+This tool is for educational and screening assistance ONLY. It does not provide a definitive medical diagnosis. Always consult with a board-certified oncologist for professional medical advice.

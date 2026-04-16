@@ -1,0 +1,12 @@
+flask
+torch
+torchvision
+numpy
+pillow
+torchcam
+requests
+python-dotenv
+reportlab
+gunicorn
+flask-cors
+# Node version dependencies are managed in package.json

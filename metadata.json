@@ -1,0 +1,6 @@
+{
+  "name": "OncoAI",
+  "description": "Production-ready breast cancer detection and AI doctor assistant using AI-powered mammogram analysis.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
