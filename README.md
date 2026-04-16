@@ -31,3 +31,5 @@ OncoAI is a production-ready medical dashboard for AI-assisted mammogram screeni
 
 ## Medical Disclaimer
 This tool is for educational and screening assistance ONLY. It does not provide a definitive medical diagnosis. Always consult with a board-certified oncologist for professional medical advice.
+
+The app of the link is:- https://ai.studio/apps/ef2642ed-a710-41bf-92bd-2acbf3e1cbca
