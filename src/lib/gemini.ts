@@ -12,6 +12,7 @@ export interface AnalysisResponse {
   precautions: string[];
   recommendedActions: string[];
   heatmapDescription: string;
+  featureImportance: { feature: string; impact: number }[];
 }
 
 export async function analyzeMammogram(base64Image: string): Promise<AnalysisResponse> {
@@ -27,9 +28,10 @@ export async function analyzeMammogram(base64Image: string): Promise<AnalysisRes
   6. Causes: A list of potential contributing factors for this finding
   7. Precautions: Important health precautions
   8. Recommended Actions: Next clinical steps
-  9. Heatmap Description: Describe which specific regions show the highest intensity or concern (e.g. "Upper outer quadrant", "Subareolar region").
+  9. Heatmap Description: Describe which specific regions show the highest intensity or concern.
+  10. Feature Importance: A list of 4 key features (e.g. "Microcalcifications", "Mass Margin", "Density", "Symmetry") and their impact score (0-100) on the final prediction.
 
-  Return EXACTLY a JSON object with these fields: prediction, confidence, risk, biRads, guidance, causes (array), precautions (array), recommendedActions (array), heatmapDescription.
+  Return EXACTLY a JSON object with these fields: prediction, confidence, risk, biRads, guidance, causes (array), precautions (array), recommendedActions (array), heatmapDescription, featureImportance (array of objects with feature name and impact).
   
   Disclaimer: Include a note that this is an AI screening tool and not a diagnosis.`;
 
@@ -54,9 +56,20 @@ export async function analyzeMammogram(base64Image: string): Promise<AnalysisRes
           causes: { type: Type.ARRAY, items: { type: Type.STRING } },
           precautions: { type: Type.ARRAY, items: { type: Type.STRING } },
           recommendedActions: { type: Type.ARRAY, items: { type: Type.STRING } },
-          heatmapDescription: { type: Type.STRING }
+          heatmapDescription: { type: Type.STRING },
+          featureImportance: {
+            type: Type.ARRAY,
+            items: {
+              type: Type.OBJECT,
+              properties: {
+                feature: { type: Type.STRING },
+                impact: { type: Type.NUMBER }
+              },
+              required: ["feature", "impact"]
+            }
+          }
         },
-        required: ["prediction", "confidence", "risk", "biRads", "guidance", "causes", "precautions", "recommendedActions", "heatmapDescription"]
+        required: ["prediction", "confidence", "risk", "biRads", "guidance", "causes", "precautions", "recommendedActions", "heatmapDescription", "featureImportance"]
       }
     }
   });

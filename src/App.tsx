@@ -50,91 +50,101 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans">
-      {/* Navbar */}
-      <nav className="bg-white border-b border-slate-200 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16 items-center">
-            <div className="flex items-center gap-2 cursor-pointer" onClick={() => setCurrentView('dashboard')}>
-              <div className="p-2 bg-blue-600 rounded-lg">
-                <Activity className="w-6 h-6 text-white" />
-              </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
-                OncoAI
-              </span>
-            </div>
+    <div className="flex flex-col h-screen">
+      {/* Header */}
+      <header className="bg-white border-b border-border-base px-6 h-16 flex items-center justify-between shrink-0 shadow-sm z-50">
+        <div 
+          className="flex items-center gap-2.5 cursor-pointer" 
+          onClick={() => setCurrentView('dashboard')}
+        >
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-primary">
+            <path d="M12 2a10 10 0 1 0 10 10H12V2Z"/><path d="M12 12L2.1 12.5"/><path d="M12 12l6.3 7.7"/>
+          </svg>
+          <span className="text-[22px] font-extrabold text-primary tracking-tighter">OncoAI</span>
+        </div>
+        
+        <nav className="hidden md:flex items-center gap-8 h-full">
+          <NavButton active={currentView === 'dashboard'} onClick={() => setCurrentView('dashboard')} label="Dashboard" />
+          <NavButton active={currentView === 'analysis'} onClick={() => setCurrentView('analysis')} label="Clinical Records" disabled={!currentScan} />
+          <NavButton active={currentView === 'chat'} onClick={() => setCurrentView('chat')} label="AI Analytics" />
+          <NavButton active={currentView === 'report'} onClick={() => setCurrentView('report')} label="Reports" disabled={!currentScan} />
+        </nav>
+
+        <button 
+          onClick={() => setCurrentView('dashboard')}
+          className="bg-primary text-white text-[13px] font-semibold px-4 py-2 rounded-md hover:opacity-90 transition-opacity"
+        >
+          New Scan Upload
+        </button>
+      </header>
+
+      {/* Main Container */}
+      <div className="flex-1 min-h-0 flex overflow-hidden">
+        {/* Workspace */}
+        <main className={`flex-1 overflow-y-auto p-4 custom-scrollbar transition-all duration-300 ${currentView === 'analysis' ? 'max-w-[calc(100%-320px)]' : 'w-full'}`}>
+          <AnimatePresence mode="wait">
+            {currentView === 'dashboard' && (
+              <motion.div key="dashboard" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                <Dashboard onScanStart={handleScanComplete} history={history} onViewReport={navigateToReport} />
+              </motion.div>
+            )}
             
-            <div className="hidden md:flex items-center space-x-8">
-              <NavButton active={currentView === 'dashboard'} onClick={() => setCurrentView('dashboard')} icon={<PieChart className="w-4 h-4" />} label="Dashboard" />
-              <NavButton active={currentView === 'analysis'} onClick={() => setCurrentView('analysis')} icon={<Activity className="w-4 h-4" />} label="Analysis" disabled={!currentScan} />
-              <NavButton active={currentView === 'report'} onClick={() => setCurrentView('report')} icon={<FileText className="w-4 h-4" />} label="Reports" disabled={!currentScan} />
-              <NavButton active={currentView === 'chat'} onClick={() => setCurrentView('chat')} icon={<MessageSquare className="w-4 h-4" />} label="AI Doctor" />
-            </div>
+            {currentView === 'analysis' && currentScan && (
+              <motion.div key="analysis" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                <Analysis result={currentScan} onNewScan={() => setCurrentView('dashboard')} onOpenChat={() => setCurrentView('chat')} />
+              </motion.div>
+            )}
 
-            <div className="flex items-center gap-4">
-              <span className="text-xs font-medium text-slate-500 uppercase tracking-wider hidden sm:inline">Physician Access</span>
-              <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-xs ring-2 ring-white">
-                DR
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
+            {currentView === 'report' && currentScan && (
+              <motion.div key="report" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                <Report result={currentScan} />
+              </motion.div>
+            )}
 
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <AnimatePresence mode="wait">
-          {currentView === 'dashboard' && (
-            <motion.div key="dashboard" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>
-              <Dashboard onScanStart={handleScanComplete} history={history} onViewReport={navigateToReport} />
-            </motion.div>
-          )}
-          
-          {currentView === 'analysis' && currentScan && (
-            <motion.div key="analysis" initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.98 }}>
-              <Analysis result={currentScan} onNewScan={() => setCurrentView('dashboard')} onOpenChat={() => setCurrentView('chat')} />
-            </motion.div>
-          )}
+            {currentView === 'chat' && (
+              <motion.div key="chat" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                <div className="h-full">
+                  <Chat currentScan={currentScan} />
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </main>
 
-          {currentView === 'report' && currentScan && (
-            <motion.div key="report" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <Report result={currentScan} />
-            </motion.div>
-          )}
+        {/* Persistent Side Panel for Analysis */}
+        {currentView === 'analysis' && (
+          <aside className="w-[320px] bg-white border-l border-border-base shrink-0 hidden lg:flex flex-col">
+            <Chat currentScan={currentScan} />
+          </aside>
+        )}
+      </div>
 
-          {currentView === 'chat' && (
-            <motion.div key="chat" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
-              <Chat currentScan={currentScan} />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </main>
-
-      {/* Disclaimer Footer */}
-      <footer className="bg-white border-t border-slate-200 mt-auto py-6">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <div className="flex items-center justify-center gap-2 text-slate-500 text-sm">
-            <AlertCircle className="w-4 h-4 text-amber-500" />
-            <span>Disclaimer: This is an AI-assisted screening tool and NOT a medical diagnosis. Always consult a healthcare professional.</span>
-          </div>
-        </div>
+      {/* Footer */}
+      <footer className="h-8 bg-slate-900 text-slate-400 flex items-center justify-center text-[11px] font-medium shrink-0 tracking-wide uppercase">
+        &copy; 2024 ONCOAI MEDICAL SYSTEMS • NOTICE: THIS IS AN AI-ASSISTED SCREENING TOOL AND NOT A MEDICAL DIAGNOSIS • CONSULT A PHYSICIAN
       </footer>
     </div>
   );
 }
 
-function NavButton({ active, onClick, icon, label, disabled = false }: { active: boolean, onClick: () => void, icon: any, label: string, disabled?: boolean }) {
+function NavButton({ active, onClick, label, disabled = false }: { active: boolean, onClick: () => void, label: string, disabled?: boolean }) {
   return (
     <button 
       disabled={disabled}
       onClick={onClick}
-      className={`flex items-center gap-2 py-2 px-1 border-b-2 transition-all duration-200 font-medium text-sm ${
-        disabled ? 'opacity-30 cursor-not-allowed border-transparent text-slate-400' :
-        active ? 'border-blue-600 text-blue-600' : 'border-transparent text-slate-600 hover:text-blue-500 hover:border-slate-300'
+      className={`relative flex items-center h-full px-1 text-sm font-medium transition-colors ${
+        disabled ? 'opacity-30 cursor-not-allowed text-text-muted' :
+        active ? 'text-primary' : 'text-text-muted hover:text-primary'
       }`}
     >
-      {icon}
       {label}
+      {active && (
+        <motion.div 
+          layoutId="activeTab"
+          className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
+        />
+      )}
     </button>
   );
 }
+

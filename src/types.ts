@@ -1,3 +1,8 @@
+export interface FeatureImportance {
+  feature: string;
+  impact: number;
+}
+
 export interface ScanResult {
   id: number;
   date: string;
@@ -11,6 +16,7 @@ export interface ScanResult {
   recommendedActions: string[];
   image: string;
   heatmapDescription: string;
+  featureImportance: FeatureImportance[];
 }
 
 export interface ChatMessage {
