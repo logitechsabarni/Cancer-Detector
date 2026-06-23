@@ -204,7 +204,7 @@ export default function Analysis({ result, onNewScan, onOpenChat }: AnalysisProp
               <div className="bg-slate-50 border border-border-base rounded-lg p-4 space-y-2">
                 <div className="flex items-center gap-2 text-[10px] font-black text-text-muted uppercase tracking-widest">
                    <Info className="w-3.5 h-3.5" />
-                   OncoAI Consultation
+                   MammoSentry Consultation
                 </div>
                 <p className="text-xs leading-relaxed font-bold text-text-main italic">
                   "{result.guidance}"
