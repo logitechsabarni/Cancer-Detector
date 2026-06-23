@@ -179,7 +179,7 @@ export default function Dashboard({ onScanStart, history, onViewReport }: Dashbo
               </div>
               <div>
                 <h2 className="text-lg font-bold">New Scan Upload</h2>
-                <p className="text-xs text-text-muted font-medium">Analyze mammogram images using OncoAI Vision Engine</p>
+                <p className="text-xs text-text-muted font-medium">Analyze mammogram images using MammoSentry Vision Engine</p>
               </div>
               <div 
                 className={`border-2 border-dashed rounded-lg p-6 py-8 transition-all cursor-pointer ${
