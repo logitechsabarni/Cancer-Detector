@@ -60,7 +60,7 @@ export default function App() {
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-primary">
             <path d="M12 2a10 10 0 1 0 10 10H12V2Z"/><path d="M12 12L2.1 12.5"/><path d="M12 12l6.3 7.7"/>
           </svg>
-          <span className="text-[22px] font-extrabold text-primary tracking-tighter">OncoAI</span>
+          <span className="text-[22px] font-extrabold text-primary tracking-tighter">MammoSentry</span>
         </div>
         
         <nav className="hidden md:flex items-center gap-8 h-full">
@@ -121,7 +121,7 @@ export default function App() {
 
       {/* Footer */}
       <footer className="h-8 bg-slate-900 text-slate-400 flex items-center justify-center text-[11px] font-medium shrink-0 tracking-wide uppercase">
-        &copy; 2024 ONCOAI MEDICAL SYSTEMS • NOTICE: THIS IS AN AI-ASSISTED SCREENING TOOL AND NOT A MEDICAL DIAGNOSIS • CONSULT A PHYSICIAN
+        &copy; 2024 MAMMOSENTRY MEDICAL SYSTEMS • NOTICE: THIS IS AN AI-ASSISTED SCREENING TOOL AND NOT A MEDICAL DIAGNOSIS • CONSULT A PHYSICIAN
       </footer>
     </div>
   );
