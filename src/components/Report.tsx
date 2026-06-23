@@ -30,7 +30,7 @@ export default function Report({ result }: ReportProps) {
             <Activity className="w-10 h-10 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl font-black text-slate-900 tracking-tight">OncoAI Clinical Summary</h1>
+            <h1 className="text-2xl font-black text-slate-900 tracking-tight">MammoSentry Clinical Summary</h1>
             <div className="flex items-center gap-2 text-slate-500 font-bold text-xs uppercase tracking-widest mt-1">
               <ShieldCheck className="w-4 h-4 text-emerald-500" />
               Verified Diagnostic Engine // MD-VERIFIED
