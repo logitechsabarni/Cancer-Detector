@@ -68,7 +68,7 @@ export default function Chat({ currentScan }: ChatProps) {
       <div className="bg-primary px-4 py-3 text-white flex items-center justify-between shrink-0">
         <div className="flex items-center gap-2">
           <MessageSquare className="w-4 h-4" />
-          <span className="text-sm font-bold tracking-tight">OncoAI Doctor Assistant</span>
+          <span className="text-sm font-bold tracking-tight">MammoSentry Doctor Assistant</span>
         </div>
         <span className="text-[10px] font-bold opacity-70 uppercase">Claude 3 Haiku Active</span>
       </div>
@@ -98,7 +98,7 @@ export default function Chat({ currentScan }: ChatProps) {
           {isLoading && (
             <div className="flex items-center gap-2 p-2 bg-slate-50 border border-border-base rounded-xl">
               <Loader2 className="w-3 h-3 text-primary animate-spin" />
-              <span className="text-[10px] font-bold text-text-muted italic uppercase italic">OncoAI Analyzing...</span>
+              <span className="text-[10px] font-bold text-text-muted italic uppercase italic">MammoSentry Analyzing...</span>
             </div>
           )}
         </AnimatePresence>
