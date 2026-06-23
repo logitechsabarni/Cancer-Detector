@@ -86,7 +86,7 @@ export async function analyzeMammogram(base64Image: string): Promise<AnalysisRes
 export async function askDoctor(query: string, context: Partial<AnalysisResponse>, history: any[] = []) {
   const model = "gemini-3-flash-preview";
 
-  const systemPrompt = `You are OncoAI, a specialized AI Doctor Assistant for breast cancer.
+  const systemPrompt = `You are MammoSentry, a specialized AI Doctor Assistant for breast cancer.
   Context of Current Patient:
   - Prediction: ${context.prediction || 'Unknown'}
   - Confidence: ${context.confidence || 0}%
