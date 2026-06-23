@@ -1,4 +1,4 @@
-Cancer Detector
+Mammo Sentry- Cancer Detector
 
 It is a production-ready medical dashboard for AI-assisted mammogram screening and clinical guidance.
 
