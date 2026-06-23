@@ -1,6 +1,6 @@
-# OncoAI — Breast Cancer Detection & AI Doctor Assistant
+Cancer Detector
 
-OncoAI is a production-ready medical dashboard for AI-assisted mammogram screening and clinical guidance.
+It is a production-ready medical dashboard for AI-assisted mammogram screening and clinical guidance.
 
 ## Features
 - 📊 **Intelligent Dashboard**: Patient management and screening overview.
